@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/scinet.iml" filepath="$PROJECT_DIR$/.idea/scinet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../HashtagAnalysis/.idea/HashtagAnalysis.iml" filepath="$PROJECT_DIR$/../HashtagAnalysis/.idea/HashtagAnalysis.iml" />
     </modules>
   </component>
 </project>
