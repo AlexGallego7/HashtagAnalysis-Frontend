@@ -1,10 +1,13 @@
 body {
   margin: 0;
-  font-family: "Roboto Thin", sans-serif;
+  font-family: "Courier New", sans-serif;
   color: whitesmoke;
   background-color: #1411a3;
 }
 
+.title {
+  margin-left: 10rem;
+}
 .search {
   text-align: center;
   color: white;
@@ -48,14 +51,21 @@ input[type=text] {
 }
 
 .tweets {
+  height: 20rem;
+  margin: 2rem 10rem 0 10rem;
   display: flex;
-  border: 3px solid #821ee1;
+  box-shadow: 0 0 3px black;
+  border: 10px solid #821ee1;
+  border-radius: 20px;
   align-items: center;
   background-color: #7f61cd;
 }
 
 .tweets .tweet {
-  width: available;
+  width: 100rem;
+  margin: 10rem 10rem 10rem 10rem;
+  background-color: darkslateblue;
+  border-radius: 20px;
 }
 
 .tweets .sentiment {
@@ -65,4 +75,22 @@ input[type=text] {
 
 img {
   height: 10rem;
+}
+
+.page-numbers {
+  list-style: none;
+  display: flex;
+  background-color: #7f61cd;
+  border: 10px solid #821ee1;
+  border-radius: 30px;
+  justify-content: center;
+  margin-right: 10rem;
+  margin-left: 10rem ;
+}
+
+.page-numbers > li {
+  margin-right: 1em;
+  user-select: none;
+  cursor: pointer;
+  font-size: 4rem;
 }

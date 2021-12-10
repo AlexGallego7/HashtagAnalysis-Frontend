@@ -1,5 +1,4 @@
 import React from 'react'
-import { TwitterTweetEmbed } from 'react-twitter-embed';
 import positive from '../../assets/positive.png'
 import negative from '../../assets/negative.png'
 import neutral from '../../assets/neutral.png'
@@ -12,8 +11,18 @@ class ShowTweets extends React.Component {
         this.stateChange(1)
         this.state = {
             error: null,
-            tweets: []
-        }
+            tweets: [],
+            currentPage: 1,
+            tweetsPerPage: 10,
+        };
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event) {
+        this.setState({
+            currentPage: Number(event.target.id)
+        });
     }
 
     stateChange(newState) {
@@ -46,7 +55,7 @@ class ShowTweets extends React.Component {
                     this.setState({
                         tweets: result
                     })
-                    console.log(result)
+                    console.log(this)
                 })
             .catch(error => {
                 console.log(error)
@@ -54,7 +63,7 @@ class ShowTweets extends React.Component {
     }
 
     sentimentImage(sentiment) {
-        let img = ""
+        let img
         if(sentiment === "POSITIVE") {
             img = positive
         }
@@ -70,25 +79,47 @@ class ShowTweets extends React.Component {
     }
 
     render() {
-        let tweets = this.state.tweets.map((e, i) => {
-            return (
-                    <div key={i} className="tweets">
-                        <div className="tweet">
-                            <div className="tweet2">
-                                <p>{e.username}</p>
-                                <p>{e.text}</p>
-                                <p>Created at: {e.date}</p>
-                                <p>Sentiment: {e.score.substr(0, 5)}</p>
-                                <p>Likes: {e.likes}</p>
-                                <p>Retweets: {e.retweets}</p>
-                                <p></p>
-                            </div>
-                        </div>
-                        <span className="sentiment">{this.sentimentImage(e.sentiment)}</span>
-                    </div>
+        const tweets = this.state.tweets;
+        const currentPage = this.state.currentPage;
+        const tweetsPerPage = this.state.tweetsPerPage;
+        const hashtag = this.state.hashtag;
+        const indexOfLastTweet = currentPage * tweetsPerPage;
+        const indexOfFirstTweet = indexOfLastTweet - tweetsPerPage;
+        const currentTweets = tweets.slice(indexOfFirstTweet, indexOfLastTweet);
 
-        )
-        })
+        const renderTweets = currentTweets.map((e, i) => {
+            return (
+                <div key={i} className="tweets">
+                    <div className="tweet">
+                        <ul>
+                            <li>@{e.username}</li>
+                            <p>{e.text}</p>
+                            <p>Created at: {e.date}</p>
+                            <p>Sentiment: {e.score.substr(0, 5)}</p>
+                            <p>Likes: {e.likes}</p>
+                            <p>Retweets: {e.retweets}</p>
+                            <p/>
+                        </ul>
+                    </div>
+                    <span className="sentiment">{this.sentimentImage(e.sentiment)}</span>
+                </div>
+
+            )})
+
+        const pageNumbers = [];
+
+        for(let i = 1; i <= Math.ceil(tweets.length / tweetsPerPage); i++) {
+            pageNumbers.push(i)
+        }
+
+        const renderPageNumbers = pageNumbers.map(number => {
+            return(
+                <li key={number} id={number} onClick={this.handleClick}>
+                    {number}
+                </li>
+            )
+        });
+
         return (
             <div>
                 <div>
@@ -96,12 +127,14 @@ class ShowTweets extends React.Component {
                     <p>HEADER</p>
                 </div>
                 <div>
-                    <TopTweets hashtag={"nice"}/>
+                    <TopTweets hashtag={hashtag}/>
                 </div>
                 <div>
-                    {
-                        tweets
-                    }
+                    <h1 className="title">Tweets</h1>
+                    {renderTweets}
+                    <ul className="page-numbers">
+                        {renderPageNumbers}
+                    </ul>
                 </div>
             </div>
         );

@@ -28,6 +28,7 @@ class TopTweets extends React.Component {
     }
 
     fetchTweets() {
+        console.log(this.props.hashtag)
         let url = "http://127.0.0.1:8000/hashtags/" + this.props.hashtag + "/top"
 
         const requestOptions = {
@@ -87,7 +88,7 @@ class TopTweets extends React.Component {
         })
         return (
             <div>
-                <h2>Top Tweets</h2>
+                <h1 className="title">Top Tweets</h1>
                 {
                     tweets
                 }

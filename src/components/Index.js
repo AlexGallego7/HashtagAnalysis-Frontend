@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@mui/material/Button';
-
+import ShowTweets from "./tweets/ShowTweets";
 
 class Index extends React.Component {
 
@@ -26,13 +26,12 @@ class Index extends React.Component {
     handleSubmit(event) {
         this.postHashtag()
         event.preventDefault()
+
     }
 
     postHashtag() {
 
-        console.log("HEy")
         let url = "http://127.0.0.1:8000/hashtags"
-
 
         const requestOptions = {
             method: 'POST',
@@ -47,7 +46,7 @@ class Index extends React.Component {
         fetch(url, requestOptions)
             .then(response => response.json())
             .then( () => {
-                this.props.history.push('/path')
+                window.location.href="analysis/" + this.state.hashtag.substr(1, this.state.hashtag.length)
             })
             .catch(error => {
                 console.log(error)
@@ -56,17 +55,18 @@ class Index extends React.Component {
 
     render() {
         return (
-            <div className="search">
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Hashtag:
-                        <input type="text" value={this.state.hashtag}
-                               onChange={this.handleChange}/>
-                    </label>
-                    <Button variant="contained">Submit</Button>
-                        <input type="submit" value="Submit"/>
-                </form>
 
+            <div className="search">
+                <div>
+                    <p>HEADER</p>
+                    <p>HEADER</p>
+                </div>
+                <label>
+                    Hashtag:<br/>
+                    <input type="text" value={this.state.hashtag}
+                           onChange={this.handleChange}/>
+                </label>
+                <Button onClick={this.handleSubmit} variant="contained">Submit</Button>
             </div>
         )
     }
