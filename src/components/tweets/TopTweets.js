@@ -8,19 +8,10 @@ class TopTweets extends React.Component {
 
     constructor(props) {
         super(props);
-        this.stateChange(1)
         this.state = {
             error: null,
             tweets: []
         }
-    }
-
-    stateChange(newState) {
-        setTimeout(function () {
-            if (newState === -1) {
-                alert('VIDEO HAS STOPPED');
-            }
-        }, 5000);
     }
 
     componentDidMount() {
@@ -28,8 +19,9 @@ class TopTweets extends React.Component {
     }
 
     fetchTweets() {
-        console.log(this.props.hashtag)
-        let url = "http://127.0.0.1:8000/hashtags/" + this.props.hashtag + "/top"
+        console.log(window.location.href.split('/')[4])
+        
+        let url = "http://127.0.0.1:8000/hashtags/" + window.location.href.split('/')[4] + "/top"
 
         const requestOptions = {
             method: 'GET',
@@ -46,7 +38,6 @@ class TopTweets extends React.Component {
                     this.setState({
                         tweets: result
                     })
-                    console.log(result)
                 })
             .catch(error => {
                 console.log(error)
@@ -72,7 +63,7 @@ class TopTweets extends React.Component {
     render() {
         let tweets = this.state.tweets.map((e, i) => {
             return (
-                    <span className="tweet">
+                    <span key={i} className="tweet">
                         <TwitterTweetEmbed
                             tweetId={e.tweet_id.toString()}
                             options={{

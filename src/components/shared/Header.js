@@ -5,7 +5,7 @@ import { Link as RouterLink } from "react-router-dom";
 const headersData = [
     {
         label: "Analyze",
-        href: "/analysis/a",
+        href: "/",
     },
     {
         label: "Trending",

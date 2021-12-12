@@ -94,3 +94,8 @@ img {
   cursor: pointer;
   font-size: 4rem;
 }
+
+.analysis {
+  display: flex;
+  justify-content: center;
+}

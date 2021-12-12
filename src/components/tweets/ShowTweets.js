@@ -3,17 +3,19 @@ import positive from '../../assets/positive.png'
 import negative from '../../assets/negative.png'
 import neutral from '../../assets/neutral.png'
 import TopTweets from "./TopTweets";
+import Chart from "../shared/Piechart";
+
 
 class ShowTweets extends React.Component {
 
     constructor(props) {
         super(props);
-        this.stateChange(1)
         this.state = {
             error: null,
             tweets: [],
             currentPage: 1,
             tweetsPerPage: 10,
+            hashtag: ""
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -23,14 +25,6 @@ class ShowTweets extends React.Component {
         this.setState({
             currentPage: Number(event.target.id)
         });
-    }
-
-    stateChange(newState) {
-        setTimeout(function () {
-            if (newState === -1) {
-                alert('VIDEO HAS STOPPED');
-            }
-        }, 5000);
     }
 
     componentDidMount() {
@@ -53,9 +47,10 @@ class ShowTweets extends React.Component {
             .then(
                 (result) => {
                     this.setState({
-                        tweets: result
+                        tweets: result,
+                        hashtag: result[0].hashtag
                     })
-                    console.log(this)
+                    console.log(this.state)
                 })
             .catch(error => {
                 console.log(error)
@@ -120,13 +115,21 @@ class ShowTweets extends React.Component {
             )
         });
 
+
+        const data = [
+            { title: 'Positive', value: tweets.filter(t => t.sentiment === 'POSITIVE').length, color: '#31ce68' },
+            { title: 'Neutral', value: tweets.filter(t => t.sentiment === 'NEUTRAL').length, color: '#898976' },
+            { title: 'Negative', value: tweets.filter(t => t.sentiment === 'NEGATIVE').length, color: '#cc4133' },
+        ];
+
         return (
             <div>
                 <div>
                     <p>HEADER</p>
                     <p>HEADER</p>
                 </div>
-                <div>
+                <div className="analysis">
+                    <Chart data={data}/>
                     <TopTweets hashtag={hashtag}/>
                 </div>
                 <div>
