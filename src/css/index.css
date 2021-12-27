@@ -19,7 +19,7 @@ body {
   background-color: #7f61cd;
 }
 
-input[type=text] {
+.search-text {
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 8px;
@@ -98,4 +98,19 @@ img {
 .analysis {
   display: flex;
   justify-content: center;
+}
+
+.search-box {
+  height: 20rem;
+  margin: 2rem 10rem 0 10rem;
+  display: flex;
+  box-shadow: 0 0 3px black;
+  border-radius: 20px;
+  background-color: cornflowerblue;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-box .filters {
+  margin-block: 20px 20px;
 }

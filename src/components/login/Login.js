@@ -1,35 +1,45 @@
-import React from 'react'
-import {GoogleLogin, useGoogleLogin} from 'react-google-login'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import GLogin from "./GLogin";
 
-import { refreshTokenSetup } from '../utils/refreshToken';
+async function loginUser(credentials) {
+    localStorage.setItem('token', '1234')
+}
 
+function Login({ setToken }) {
+    const [username, setUserName] = useState();
+    const [password, setPassword] = useState();
 
-const clientId = '33797170213-dm39mlprsjib8i1bgp2abebvvqimlmu6.apps.googleusercontent.com'
-
-function Login() {
-    const onSuccess = (res) => {
-        console.log('[Login success] currentUser: ', res.profileObj)
-
-        refreshTokenSetup(res)
-    };
-
-    const onFailure = (res) => {
-        console.log('[Login failed] error: ', res)
-    };
+    const handleSubmit = async e => {
+        e.preventDefault();
+        const token = await loginUser({
+            username,
+            password
+        });
+        setToken(token);
+    }
 
     return(
-        <div>
-            <GoogleLogin
-                clientId={clientId}
-                buttonText="Login"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-                cookiePolicy={'single_host_origin'}
-                style={{marginTop: '100px'}}
-                isSignedIn={true}
-                />
+        <div className="login-wrapper">
+            <h1>Please Log In</h1>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    <p>Username</p>
+                    <input type="text" onChange={e => setUserName(e.target.value)} />
+                </label>
+                <label>
+                    <p>Password</p>
+                    <input type="password" onChange={e => setPassword(e.target.value)} />
+                </label>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+
+            <GLogin/>
         </div>
-    );
+    )
 }
+
 
 export default Login;

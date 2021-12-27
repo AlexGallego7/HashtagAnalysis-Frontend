@@ -4,20 +4,21 @@ import {GoogleLogout} from 'react-google-login'
 
 const clientId = '33797170213-dm39mlprsjib8i1bgp2abebvvqimlmu6.apps.googleusercontent.com'
 
-function Logout() {
+function GLogout() {
     const onSuccess = () => {
-        alert('Logout made successfully')
+        localStorage.removeItem('token')
+        alert('GLogout made successfully')
     };
 
     return(
         <div>
             <GoogleLogout
                 clientId={clientId}
-                buttonText="Logout"
+                buttonText="GLogout"
                 onLogoutSuccess={onSuccess}
             />
         </div>
     );
 }
 
-export default Logout;
+export default GLogout;

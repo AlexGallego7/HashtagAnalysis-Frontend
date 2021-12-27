@@ -1,6 +1,8 @@
 import { AppBar, Toolbar, Typography, makeStyles, Button,} from "@material-ui/core";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
+import GLogin from "../login/GLogin";
+import GLogout from "../login/GLogout";
 
 const headersData = [
     {
@@ -19,6 +21,10 @@ const headersData = [
         label: "Contact Us",
         href: "/contact",
     },
+    {
+        label: "Log out",
+        href: "/logout"
+    }
     ];
 
 const useStyles = makeStyles(() => ({
@@ -49,6 +55,8 @@ function Header() {
             <Toolbar>
                 {main_logo}
                 <div>{getMenuButtons()}</div>
+                <GLogin/>
+                <GLogout/>
             </Toolbar>
         );
     };
