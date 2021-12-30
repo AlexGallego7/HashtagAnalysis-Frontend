@@ -1,42 +1,71 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import GLogin from "./GLogin";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import {NavLink} from "react-router-dom";
+
 
 async function loginUser(credentials) {
     localStorage.setItem('token', '1234')
 }
 
-function Login({ setToken }) {
+function Login() {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
+    const [error, setError] = useState();
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const token = await loginUser({
-            username,
-            password
-        });
-        setToken(token);
+
+        let url = "http://127.0.0.1:8000/users/login"
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            })
+        }
+
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then(
+                async (result) => {
+                    localStorage.setItem('token', result)
+                    window.location.href = "/"
+                })
+            .catch(error => {
+                console.log(error)
+                setError("Wrong credentials. Please try again.")
+            })
     }
 
     return(
-        <div className="login-wrapper">
-            <h1>Please Log In</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    <p>Username</p>
-                    <input type="text" onChange={e => setUserName(e.target.value)} />
-                </label>
-                <label>
-                    <p>Password</p>
-                    <input type="password" onChange={e => setPassword(e.target.value)} />
-                </label>
-                <div>
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
-
-            <GLogin/>
+        <div>
+            <p>HEADER</p>
+            <p>HEADER</p>
+            <div>
+                <h1 className="title">Please Log In</h1>
+            </div>
+            <div className="login-box">
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <TextField id="username-input" name="username" label="Username" type="text" onChange={e => setUserName(e.target.value)}/>
+                    </div>
+                    <div>
+                        <TextField id="pwd-input" name="password" label="Password" type="password" onChange={e => setPassword(e.target.value)}/>
+                    </div>
+                    <div>
+                        <Button variant="contained" type="submit" color="primary">Login</Button><br/>
+                        <GLogin/>
+                    </div>
+                    <NavLink to="/register">Do you have an account?</NavLink><br/>
+                    <label style={{color: "red"}}>{error}</label>
+                </form>
+            </div>
         </div>
     )
 }

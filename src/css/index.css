@@ -114,3 +114,14 @@ img {
 .search-box .filters {
   margin-block: 20px 20px;
 }
+
+.login-box {
+  height: 20rem;
+  margin: 2rem 10rem 0 10rem;
+  display: flex;
+  box-shadow: 0 0 3px black;
+  border-radius: 20px;
+  background-color: cornflowerblue;
+  justify-content: center;
+  align-items: center;
+}

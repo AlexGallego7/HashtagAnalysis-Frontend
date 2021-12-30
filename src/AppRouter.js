@@ -11,13 +11,6 @@ import GLogout from "./components/login/GLogout";
 
 
 const AppRouter = () => {
-    const token = localStorage.getItem('token')
-
-    if(!token) {
-        console.log(token)
-        return <Login />
-    }
-
     return(
         <BrowserRouter>
             <Header/>
@@ -28,11 +21,9 @@ const AppRouter = () => {
                 <Route exact path="/users/:id" element={<UserProfile/>}/>
                 <Route exact path="/logout" element={GLogout}/>
                 <Route exact path="/trending" element={<Trending/>}/>
+                <Route exact path="/login" element={<Login/>}/>
             </Routes>
         </BrowserRouter>
-
-
-
     )
 }
 
