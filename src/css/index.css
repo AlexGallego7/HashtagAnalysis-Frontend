@@ -125,3 +125,14 @@ img {
   justify-content: center;
   align-items: center;
 }
+
+.register-box {
+  height: 30rem;
+  margin: 2rem 10rem 0 10rem;
+  display: flex;
+  box-shadow: 0 0 3px black;
+  border-radius: 20px;
+  background-color: lavender;
+  justify-content: center;
+  align-items: center;
+}

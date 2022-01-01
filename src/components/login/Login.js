@@ -4,11 +4,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {NavLink} from "react-router-dom";
 
-
-async function loginUser(credentials) {
-    localStorage.setItem('token', '1234')
-}
-
 function Login() {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
@@ -33,9 +28,9 @@ function Login() {
         fetch(url, requestOptions)
             .then(response => response.json())
             .then(
-                async (result) => {
+                (result) => {
                     localStorage.setItem('token', result)
-                    window.location.href = "/"
+                    window.location.href = "/me"
                 })
             .catch(error => {
                 console.log(error)
