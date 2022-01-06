@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './css/index.css';
 import reportWebVitals from './reportWebVitals';
 import AppRouter from "./AppRouter";
-import DateAdapter from '@mui/lab/AdapterDateFns';
 
 
 ReactDOM.render(

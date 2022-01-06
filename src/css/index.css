@@ -55,13 +55,31 @@ body {
   margin: 2rem 10rem 0 10rem;
   display: flex;
   box-shadow: 0 0 3px black;
-  border: 10px solid #821ee1;
+  border: 5px solid #821ee1;
   border-radius: 20px;
   align-items: center;
   background-color: #7f61cd;
 }
 
 .tweets .tweet {
+  width: 100rem;
+  margin: 10rem 10rem 10rem 10rem;
+  background-color: darkslateblue;
+  border-radius: 20px;
+}
+
+.trendings {
+  height: 10rem;
+  margin: 0 10rem 0 10rem;
+  display: flex;
+  box-shadow: 0 0 3px black;
+  border: 5px solid #821ee1;
+  border-radius: 20px;
+  align-items: center;
+  background-color: #7f61cd;
+}
+
+.trendings .hashtags {
   width: 100rem;
   margin: 10rem 10rem 10rem 10rem;
   background-color: darkslateblue;
@@ -135,4 +153,20 @@ img {
   background-color: lavender;
   justify-content: center;
   align-items: center;
+}
+
+.country-dropdown {
+  color: black
+}
+
+.select-box {
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  margin: 2rem 10rem 0 10rem;
+  display: flex;
+  background-color: cornflowerblue;
+  border: 5px solid darkslateblue;
+  color: black
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import {TwitterHashtagButton} from "react-twitter-embed";
+import SelectCountry from "./SelectCountry";
+import Button from "@material-ui/core/Button";
 
 class Trending extends React.Component {
 
@@ -8,17 +10,64 @@ class Trending extends React.Component {
         this.state = {
             error: null,
             hashtags: [],
+            hashtag: "",
             country_id : 1
         };
+        this.fetchTrending = this.fetchTrending.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
 
+    getCountryCode = (country_id) => {
+        console.log(country_id)
+
+        this.setState({
+            country_id: country_id
+        })
+
+        this.fetchTrending(country_id)
     }
 
     componentDidMount() {
-        this.fetchTrending()
+        this.fetchTrending(1)
     }
 
-    fetchTrending() {
-        let url = "http://127.0.0.1:8000/trending/" + this.state.country_id
+    handleSubmit(val, event) {
+        this.postHashtag(val.name)
+        event.preventDefault()
+    }
+
+    postHashtag(val) {
+
+        let url = "http://127.0.0.1:8000/hashtags"
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: val,
+                num: 100
+            })
+        }
+
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then( () => {
+
+                if(val[0] === '#')
+                    window.location.href="analysis/" + val.substr(1, val.length)
+                else
+                    window.location.href="analysis/" + val
+
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    fetchTrending(country_id) {
+        let url = "http://127.0.0.1:8000/trending/" + country_id
 
         const requestOptions = {
             method: 'GET',
@@ -43,17 +92,22 @@ class Trending extends React.Component {
     }
 
     render() {
+        console.log(this.state.hashtags)
         const hashtags = this.state.hashtags;
         const renderTrends = hashtags.map((e, i) => {
             return (
-                <div key={i}>
-                    <div className="tweet">
+                <div key={i} className="trendings">
+                    <div className="hashtags">
                         <ul>
                             <li>{e.name}</li>
-                            {
-                                e.name[0] === "#" &&
+                            <div style={{marginTop: 10}}>
+                                {
+                                    e.name[0] === "#" &&
                                     <TwitterHashtagButton tag={e.name}/>
-                            }
+                                }
+                            </div>
+                            <Button style={{marginTop: 10}} variant="contained" type="submit" color="primary"
+                                    onClick={ (event) => this.handleSubmit(e, event)}>Analyze</Button>
                           <p/>
                         </ul>
                     </div>
@@ -69,7 +123,12 @@ class Trending extends React.Component {
                 </div>
                 <div>
                     <h1 className="title">Trending</h1>
-                    {renderTrends}
+                    <div className="select-box">
+                        <SelectCountry parentCallback={this.getCountryCode}/>
+                    </div><br/><br/>
+                    <div>
+                        {renderTrends}
+                    </div>
                 </div>
             </div>
         );

@@ -3,8 +3,20 @@ import { PieChart } from 'react-minimal-pie-chart';
 
 
 function Chart(props) {
-    const [selected, setSelected] = useState(0) ;
+    const [selected, setSelected] = useState(undefined) ;
     const [hovered, setHovered] = useState(undefined);
+
+    const dict = {
+        0: "POSITIVE",
+        2: "NEGATIVE",
+        1: "NEUTRAL",
+        undefined: ""
+    }
+
+    const sendData = (sentiment) => {
+        setSelected(sentiment)
+        props.parentCallback(dict[sentiment])
+    }
 
     const data = props.data.map((entry, i) => {
         if (hovered === i) {
@@ -43,7 +55,7 @@ function Chart(props) {
                     pointerEvents: 'none',
                 }}
                 onClick={(_, index) => {
-                    setSelected(index === selected ? undefined : index);
+                    sendData(index === selected ? undefined : index);
                 }}
                 onMouseOver={(_, index) => {
                     setHovered(index);

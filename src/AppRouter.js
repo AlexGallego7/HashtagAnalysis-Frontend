@@ -12,6 +12,7 @@ import Register from "./components/login/Register";
 
 
 const AppRouter = () => {
+    console.log("heeeeeeeey")
     return(
         <BrowserRouter>
             <Header/>

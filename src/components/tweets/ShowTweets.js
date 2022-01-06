@@ -15,7 +15,8 @@ class ShowTweets extends React.Component {
             tweets: [],
             currentPage: 1,
             tweetsPerPage: 10,
-            hashtag: ""
+            hashtag: "",
+            selectedSentiment: ""
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -57,6 +58,13 @@ class ShowTweets extends React.Component {
             })
     }
 
+    getTweetsBySentiment = (sentiment) => {
+        this.setState({
+            selectedSentiment: sentiment
+        })
+        this.render()
+    }
+
     sentimentImage(sentiment) {
         let img
         if(sentiment === "POSITIVE") {
@@ -74,15 +82,24 @@ class ShowTweets extends React.Component {
     }
 
     render() {
+        const sentiment = this.state.selectedSentiment
         const tweets = this.state.tweets;
         const currentPage = this.state.currentPage;
         const tweetsPerPage = this.state.tweetsPerPage;
         const hashtag = this.state.hashtag;
         const indexOfLastTweet = currentPage * tweetsPerPage;
         const indexOfFirstTweet = indexOfLastTweet - tweetsPerPage;
-        const currentTweets = tweets.slice(indexOfFirstTweet, indexOfLastTweet);
+        let currentTweets;
+        if(sentiment !== "") {
+            currentTweets = tweets.filter(ct => ct.sentiment === sentiment)
+                .slice(indexOfFirstTweet, indexOfLastTweet);
+        }
+        else {
+            currentTweets = tweets.slice(indexOfFirstTweet, indexOfLastTweet);
+        }
 
-        const renderTweets = currentTweets.map((e, i) => {
+        const renderTweets = currentTweets
+            .map((e, i) => {
             return (
                 <div key={i} className="tweets">
                     <div className="tweet">
@@ -103,7 +120,10 @@ class ShowTweets extends React.Component {
 
         const pageNumbers = [];
 
-        for(let i = 1; i <= Math.ceil(tweets.length / tweetsPerPage); i++) {
+        const length = Math.ceil(((sentiment === "") ?
+            tweets.length : tweets.filter(t => t.sentiment === sentiment).length) / tweetsPerPage)
+
+        for(let i = 1; i <= length; i++) {
             pageNumbers.push(i)
         }
 
@@ -129,7 +149,7 @@ class ShowTweets extends React.Component {
                     <p>HEADER</p>
                 </div>
                 <div className="analysis">
-                    <Chart data={data}/>
+                    <Chart data={data} parentCallback={this.getTweetsBySentiment}/>
                     <TopTweets hashtag={hashtag}/>
                 </div>
                 <div>
