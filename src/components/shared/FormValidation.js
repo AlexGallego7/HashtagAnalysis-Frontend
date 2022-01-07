@@ -99,9 +99,7 @@ export const useFormControls = () => {
             .then(response => response.json())
             .then( (result) => {
                 localStorage.setItem('token', result)
-                setTimeout(function() {
-                    window.location.href = "/"
-                }, 100)
+                window.location.href = "/"
             })
             .catch(error => {
                 console.log(error)

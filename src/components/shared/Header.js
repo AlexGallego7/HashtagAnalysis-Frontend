@@ -54,15 +54,30 @@ function Header() {
             <Toolbar>
                 {main_logo}
                 <div>{getMenuButtons()}</div>
-                <Button
-                    {...{
-                        key: localStorage.getItem('token') ? "Logout" : "Log in",
-                        color: "inherit",
-                        to: localStorage.getItem('token') ? logout() : "/login",
-                        component: RouterLink,
-                        className: menuButton,
-                }}
-                >{localStorage.getItem('token') ? "Log out" : "Log in"}</Button>
+                {
+                    (localStorage.getItem('token') ?
+                        <Button onClick={logout}
+                            {...
+                                {
+                                    key: "Logout",
+                                    color: "inherit",
+                                    to: "logout",
+                                    component: RouterLink,
+                                    className: menuButton,
+                                }}
+                        >Log out</Button>
+                        :
+                        <Button
+                            {...
+                                {
+                                    key: "Login",
+                                    color: "inherit",
+                                    to: "login",
+                                    component: RouterLink,
+                                    className: menuButton,
+                                }}
+                        >Log in</Button>)
+                }
             </Toolbar>
         );
     };

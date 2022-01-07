@@ -1,16 +1,11 @@
 import React from 'react'
 import {GoogleLogin} from 'react-google-login'
 
-import { refreshTokenSetup } from '../utils/refreshToken';
-
-
 const clientId = '33797170213-dm39mlprsjib8i1bgp2abebvvqimlmu6.apps.googleusercontent.com'
 
 function GLogin() {
     const onSuccess = (res) => {
         console.log('[GLogin success] currentUser: ', res.profileObj)
-
-        refreshTokenSetup(res)
     };
 
     const onFailure = (res) => {

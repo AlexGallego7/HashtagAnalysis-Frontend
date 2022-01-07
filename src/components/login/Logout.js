@@ -6,13 +6,13 @@ function Logout() {
         console.log("hey crack")
         localStorage.removeItem('token')
 
-        window.location.href = "/"
 
     }
 
     return(
         <div>
-            {logout}
+            {localStorage.removeItem('token')}
+            {window.location.href = "/"}
         </div>
     )
 }
