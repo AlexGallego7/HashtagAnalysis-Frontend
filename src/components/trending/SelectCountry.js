@@ -29,7 +29,7 @@ const SelectCountry = (props) => {
             <ReactFlagsSelect
                 selected={selected}
                 onSelect={code => selectChanged(code)}
-                countries={["US", "GB", "FR", "DE", "IT", "ES", "AD", "AR", "BE", "BR", "CA", "IE", "NL", "CH"]}
+                countries={["Worldwide", "US", "GB", "FR", "DE", "IT", "ES", "AR", "BE", "BR", "CA", "IE", "NL", "CH"]}
                 searchable
             />)
 }

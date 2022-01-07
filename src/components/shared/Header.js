@@ -13,7 +13,7 @@ const headersData = [
     },
     {
         label: "Profile",
-        href: "/me",
+        href: localStorage.getItem('token') ? "/me" : "/login",
     },
     {
         label: "Contact Us",

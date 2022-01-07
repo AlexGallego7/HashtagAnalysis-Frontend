@@ -68,6 +68,13 @@ body {
   border-radius: 20px;
 }
 
+.tweets .alert {
+  cursor: pointer;
+  height: 100px;
+  width: 100px;
+  margin-left: 5rem;
+}
+
 .trendings {
   height: 10rem;
   margin: 0 10rem 0 10rem;
@@ -167,6 +174,6 @@ img {
   margin: 2rem 10rem 0 10rem;
   display: flex;
   background-color: cornflowerblue;
-  border: 5px solid darkslateblue;
+  border: 5px solid #400CCC;
   color: black
 }

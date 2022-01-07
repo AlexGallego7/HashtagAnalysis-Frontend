@@ -2,9 +2,11 @@ import React from 'react'
 import positive from '../../assets/positive.png'
 import negative from '../../assets/negative.png'
 import neutral from '../../assets/neutral.png'
+import alert from '../../assets/alert.png'
 import TopTweets from "./TopTweets";
 import Chart from "../shared/Piechart";
-
+import Popup from 'reactjs-popup';
+import PopUp from "../shared/PopUp";
 
 class ShowTweets extends React.Component {
 
@@ -16,7 +18,8 @@ class ShowTweets extends React.Component {
             currentPage: 1,
             tweetsPerPage: 10,
             hashtag: "",
-            selectedSentiment: ""
+            selectedSentiment: "",
+            showPopUp: false
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -102,6 +105,7 @@ class ShowTweets extends React.Component {
             .map((e, i) => {
             return (
                 <div key={i} className="tweets">
+                    <PopUp trigger={<img className="alert" src={alert} alt="Alert"/>}/>
                     <div className="tweet">
                         <ul>
                             <li>@{e.username}</li>

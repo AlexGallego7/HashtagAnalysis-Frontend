@@ -14,7 +14,7 @@ function Register() {
             <p>HEADER</p>
             <p>HEADER</p>
             <div>
-                <h1 className="title">Please Log In</h1>
+                <h1 className="title">Create new account</h1>
             </div>
             <div className="register-box">
                 <form onSubmit={handleFormSubmit}>

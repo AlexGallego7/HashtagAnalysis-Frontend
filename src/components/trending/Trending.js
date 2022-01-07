@@ -18,8 +18,6 @@ class Trending extends React.Component {
     }
 
     getCountryCode = (country_id) => {
-        console.log(country_id)
-
         this.setState({
             country_id: country_id
         })
