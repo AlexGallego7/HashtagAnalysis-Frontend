@@ -76,7 +76,9 @@ class Index extends React.Component {
                     <p>HEADER</p>
                     <p>HEADER</p>
                 </div>
-
+                <div>
+                    <h1 className="title" style={{textAlign: "left"}}>Analyze</h1>
+                </div>
                 <div className="search-box">
                     <form onSubmit={this.handleSubmit}>
                         <div>

@@ -5,8 +5,8 @@ import neutral from '../../assets/neutral.png'
 import alert from '../../assets/alert.png'
 import TopTweets from "./TopTweets";
 import Chart from "../shared/Piechart";
-import Popup from 'reactjs-popup';
 import PopUp from "../shared/PopUp";
+import Button from "@material-ui/core/Button";
 
 class ShowTweets extends React.Component {
 
@@ -22,7 +22,10 @@ class ShowTweets extends React.Component {
             showPopUp: false
         };
 
+        console.log(window.location.href)
+
         this.handleClick = this.handleClick.bind(this);
+        this.saveAnalysis  =this.saveAnalysis.bind(this);
     }
 
     handleClick(event) {
@@ -82,6 +85,41 @@ class ShowTweets extends React.Component {
         return (
             <img src={img} alt="Sentiment"/>
         )
+    }
+
+    saveAnalysis() {
+
+        let url = "http://127.0.0.1:8000/analysis"
+
+        const positive = this.state.tweets.filter(t => t.sentiment === 'POSITIVE').length
+        const neutral = this.state.tweets.filter(t => t.sentiment === 'NEUTRAL').length
+        const negative = this.state.tweets.filter(t => t.sentiment === 'NEGATIVE').length
+        const tweets = this.state.tweets.length
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: localStorage.getItem('token'),
+                hashtag_id: this.state.hashtag,
+                hashtag: this.state.hashtag,
+                positive: positive,
+                neutral: neutral,
+                negative: negative,
+                tweets: tweets
+            })
+        }
+
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then(
+                () => { })
+            .catch(error => {
+                console.log(error)
+            })
+
     }
 
     render() {
@@ -151,6 +189,15 @@ class ShowTweets extends React.Component {
                 <div>
                     <p>HEADER</p>
                     <p>HEADER</p>
+                </div>
+                <div>
+                    <h1 className="title">Analysis of {this.state.hashtag}</h1>
+                    { (localStorage.getItem('token')) ?
+                        <Button style={{marginTop: 10, marginLeft: 160}} variant="contained" type="submit" color="primary"
+                                onClick={this.saveAnalysis}>Save Analysis</Button>
+                        : null
+                    }
+
                 </div>
                 <div className="analysis">
                     <Chart data={data} parentCallback={this.getTweetsBySentiment}/>

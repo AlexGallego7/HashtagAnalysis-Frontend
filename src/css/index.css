@@ -8,6 +8,11 @@ body {
 .title {
   margin-left: 10rem;
 }
+
+.save-button {
+  margin-left: 10rem;
+}
+
 .search {
   text-align: center;
   color: white;
@@ -152,12 +157,12 @@ img {
 }
 
 .register-box {
-  height: 30rem;
+  height: 33rem;
   margin: 2rem 10rem 0 10rem;
   display: flex;
   box-shadow: 0 0 3px black;
   border-radius: 20px;
-  background-color: lavender;
+  background-color: cornflowerblue;
   justify-content: center;
   align-items: center;
 }
@@ -177,3 +182,23 @@ img {
   border: 5px solid #400CCC;
   color: black
 }
+
+.user-box {
+  height: 33rem;
+  margin: 2rem 10rem 0 10rem;
+  display: flex;
+  box-shadow: 0 0 3px black;
+  border-radius: 20px;
+  background-color: cornflowerblue;
+}
+
+  .user-box .info {
+    display: block;
+    margin-top: 2rem;
+    margin-left: 10rem
+  }
+
+  .user-box .analyzed-hashtags {
+    display: flex;
+    margin-top: 2rem;
+  }

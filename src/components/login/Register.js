@@ -77,8 +77,8 @@ function Register() {
                                        helperText: errors["r_password"]
                                    })}
                         />
-                    </div>
-                    <div>
+                    </div><br/>
+                    <div style={{textAlign: "center"}}>
                         <Button variant="contained" type="submit" color="primary" disabled={!formIsValid()}>
                             Register</Button><br/>
                     </div>

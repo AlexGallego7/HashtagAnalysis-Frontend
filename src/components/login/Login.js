@@ -52,11 +52,11 @@ function Login() {
                     </div>
                     <div>
                         <TextField id="pwd-input" name="password" label="Password" type="password" onChange={e => setPassword(e.target.value)}/>
-                    </div>
-                    <div>
-                        <Button variant="contained" type="submit" color="primary">Login</Button><br/>
+                    </div><br/>
+                    <div style={{textAlign: "center"}}>
+                        <Button variant="contained" type="submit" color="primary">Login</Button><br/><br/>
                         <GLogin/>
-                    </div>
+                    </div><br/>
                     <NavLink to="/register">Do you have an account?</NavLink><br/>
                     <label style={{color: "red"}}>{error}</label>
                 </form>
