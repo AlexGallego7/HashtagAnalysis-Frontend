@@ -35,7 +35,7 @@ export const useFormControls = () => {
         if ("password" in fieldValues) {
             temp.password = fieldValues.password ? "" : "This field is required."
             if (fieldValues.password) {
-                temp.password = (fieldValues.password.length > 7) ? "" : "Password must be 8 characters long."
+                temp.password = (fieldValues.password.length > 7) ? "" : "Password must be 8 or more characters long."
             }
         }
 

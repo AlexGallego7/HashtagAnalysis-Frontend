@@ -180,7 +180,7 @@ class ShowTweets extends React.Component {
 
         const data = [
             { title: 'Positive', value: tweets.filter(t => t.sentiment === 'POSITIVE').length, color: '#31ce68' },
-            { title: 'Neutral', value: tweets.filter(t => t.sentiment === 'NEUTRAL').length, color: '#898976' },
+            { title: 'Neutral', value: tweets.filter(t => t.sentiment === 'NEUTRAL').length, color: '#e8de17' },
             { title: 'Negative', value: tweets.filter(t => t.sentiment === 'NEGATIVE').length, color: '#cc4133' },
         ];
 

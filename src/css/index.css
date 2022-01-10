@@ -183,8 +183,31 @@ img {
   color: black
 }
 
+.friend-box {
+  height: 10rem;
+  width: 40rem;
+  margin: 2rem 10rem 0 10rem;
+  box-shadow: 0 0 3px black;
+  border-radius: 20px;
+  background-color: cornflowerblue;
+  align-items: center;
+  display: block;
+  justify-content: center;
+}
+
+.how-to {
+  height: 10rem;
+  width: 40rem;
+  margin: 2rem 10rem 0 10rem;
+  box-shadow: 0 0 3px black;
+  border-radius: 20px;
+  background-color: cornflowerblue;
+  align-items: center;
+  display: block;
+  justify-content: center;
+}
+
 .user-box {
-  height: 33rem;
   margin: 2rem 10rem 0 10rem;
   display: flex;
   box-shadow: 0 0 3px black;
@@ -195,7 +218,7 @@ img {
   .user-box .info {
     display: block;
     margin-top: 2rem;
-    margin-left: 10rem
+    margin-left: 10rem;
   }
 
   .user-box .analyzed-hashtags {

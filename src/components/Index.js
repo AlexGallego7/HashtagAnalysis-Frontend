@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import Button from "@material-ui/core/Button";
 import {DatePicker, LocalizationProvider} from "@mui/lab";
+import {NavLink} from "react-router-dom";
 
 class Index extends React.Component {
 
@@ -13,12 +14,15 @@ class Index extends React.Component {
         this.state = {
             error: null,
             hashtag: "",
-            tweets: []
+            tweets: [],
+            friend: "",
+            message: ""
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleChangeDate = this.handleChangeDate.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.addFriend = this.addFriend.bind(this)
     }
 
     handleChange(event) {
@@ -26,6 +30,47 @@ class Index extends React.Component {
             ...this.state,
             [event.target.name]: event.target.value
         })
+    }
+
+    addFriend() {
+
+        if(!localStorage.getItem('token'))
+            window.location.href = "/login"
+        else {
+            let url = "http://127.0.0.1:8000/friendships"
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    from_user: localStorage.getItem('token'),
+                    to_user: this.state.friend,
+                    accepted: false,
+                })
+            }
+
+            fetch(url, requestOptions)
+                .then(response => response.json())
+                .then( (result) => {
+                    if ('id' in result) {
+                        this.setState({
+                            message: "You have sent a friend request to " + this.state.friend
+                        })
+                    }
+                    else {
+                        this.setState({
+                            message: result.message
+                        })
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+
+                })
+        }
     }
 
     handleChangeDate(newDate) {
@@ -102,6 +147,36 @@ class Index extends React.Component {
                         </div>
                     </form>
                 </div>
+                <div style={{display: 'flex'}}>
+                    <div>
+                        <div>
+                            <h1 className="title" style={{textAlign: "left"}}>Add friends</h1>
+                        </div>
+                        <div className="friend-box">
+                            <TextField style={{color: 'white', marginTop: 30}} name="friend" label="Add a friend" type="text" onChange={this.handleChange}/>
+                            <Button style={{marginLeft: 10, marginTop: 30}} variant="contained" type="submit" color="primary" onClick={this.addFriend}>Add friend</Button><br/>
+                            <div style={{marginTop: 10}}>
+                                <small>{this.state.message}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <h1 className="title" style={{textAlign: "left"}}>How to use?</h1>
+                        </div>
+                        <div className="how-to">
+                                <p style={{marginTop: 20}}>
+                                    Welcome to Hashtag Analyzer. To begin analyzing, enter any #hashtag or keyword and
+                                    the amount of tweets to use in the analysis. Hope you like it!<br/><br/>
+
+                                    Also don't miss out on the trends happening right now around the globe and
+                                    analyze them by clicking&nbsp;<NavLink to={"/trending"}>here</NavLink>
+                                </p>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         )
     }
