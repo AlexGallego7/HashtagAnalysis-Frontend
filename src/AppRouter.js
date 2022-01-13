@@ -7,9 +7,8 @@ import Trending from "./components/trending/Trending"
 import ShowTweets from "./components/tweets/ShowTweets";
 import Header from "./components/shared/Header";
 import Login from "./components/login/Login";
-import GLogout from "./components/login/GLogout";
 import Register from "./components/login/Register";
-
+import Contact from "./components/contact/Contact";
 
 const AppRouter = () => {
     return(
@@ -19,11 +18,11 @@ const AppRouter = () => {
                 <Route exact path="/" element={<Index/>}/>
                 <Route exact path="/analysis/:hashtag" element={<ShowTweets/>}/>
                 <Route exact path="/me" element={<MyProfile/>}/>
-                <Route exact path="/users/:id" element={<UserProfile/>}/>
-                <Route exact path="/logout" element={GLogout}/>
+                <Route exact path="/profile/:id" element={<UserProfile/>}/>
                 <Route exact path="/trending" element={<Trending/>}/>
                 <Route exact path="/login" element={<Login/>}/>
                 <Route exact path="/register" element={<Register/>}/>
+                <Route exact path="/contact" element={<Contact/>}/>
             </Routes>
         </BrowserRouter>
     )

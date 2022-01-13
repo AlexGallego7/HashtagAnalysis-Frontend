@@ -22,8 +22,6 @@ class ShowTweets extends React.Component {
             showPopUp: false
         };
 
-        console.log(window.location.href)
-
         this.handleClick = this.handleClick.bind(this);
         this.saveAnalysis  =this.saveAnalysis.bind(this);
     }
@@ -89,7 +87,7 @@ class ShowTweets extends React.Component {
 
     saveAnalysis() {
 
-        let url = "http://127.0.0.1:8000/analysis"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/analysis"
 
         const positive = this.state.tweets.filter(t => t.sentiment === 'POSITIVE').length
         const neutral = this.state.tweets.filter(t => t.sentiment === 'NEUTRAL').length

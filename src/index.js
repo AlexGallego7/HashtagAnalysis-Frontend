@@ -6,7 +6,10 @@ import AppRouter from "./AppRouter";
 
 
 ReactDOM.render(
-    <AppRouter/>,
+    <div>
+        <AppRouter/>
+    </div>
+,
     document.getElementById('root')
 );
 

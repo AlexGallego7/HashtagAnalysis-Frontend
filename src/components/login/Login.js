@@ -12,7 +12,7 @@ function Login() {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        let url = "http://127.0.0.1:8000/users/login"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/login"
 
         const requestOptions = {
             method: 'POST',
@@ -47,6 +47,7 @@ function Login() {
             </div>
             <div className="login-box">
                 <form onSubmit={handleSubmit}>
+                    <small style={{color: "red", marginTop: 20}}>{error}</small>
                     <div>
                         <TextField id="username-input" name="username" label="Username" type="text" onChange={e => setUserName(e.target.value)}/>
                     </div>
@@ -58,7 +59,6 @@ function Login() {
                         <GLogin/>
                     </div><br/>
                     <NavLink to="/register">Do you have an account?</NavLink><br/>
-                    <label style={{color: "red"}}>{error}</label>
                 </form>
             </div>
         </div>

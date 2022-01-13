@@ -125,6 +125,13 @@ img {
   font-size: 4rem;
 }
 
+.stretch {
+  width: 100%;
+  display: inline-block;
+  font-size: 0;
+  line-height: 0
+}
+
 .analysis {
   display: flex;
   justify-content: center;
@@ -185,28 +192,46 @@ img {
 
 .friend-box {
   height: 10rem;
-  width: 40rem;
-  margin: 2rem 10rem 0 10rem;
+  width: 30rem;
+  margin-left: 10rem;
+  margin-right: 5rem;
   box-shadow: 0 0 3px black;
   border-radius: 20px;
   background-color: cornflowerblue;
   align-items: center;
   display: block;
   justify-content: center;
+  text-align: center;
 }
 
 .how-to {
-  height: 10rem;
+  height: 11.2rem;
   width: 40rem;
-  margin: 2rem 10rem 0 10rem;
+  margin-left: 5rem;
   box-shadow: 0 0 3px black;
   border-radius: 20px;
   background-color: cornflowerblue;
-  align-items: center;
-  display: block;
-  justify-content: center;
+  display: flex;
+  text-align: center;
 }
 
+.login-info {
+  height: 10rem;
+  width: 20rem;
+  border-radius: 20px;
+  background-color: cornflowerblue;
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.pending {
+  border-radius: 20px;
+  background-color: cornflowerblue;
+  align-items: center;
+  display: flex;
+}
 .user-box {
   margin: 2rem 10rem 0 10rem;
   display: flex;
@@ -222,6 +247,13 @@ img {
   }
 
   .user-box .analyzed-hashtags {
-    display: flex;
+    display: block;
     margin-top: 2rem;
+    margin-left: 10rem;
+  }
+
+  .user-box .friends {
+    display: block;
+    margin-top: 2rem;
+    margin-left: 10rem;
   }

@@ -5,7 +5,7 @@ function PopUp(props) {
 
     const retrain_model = () => {
 
-        let url = "http://127.0.0.1:8000/train"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/train"
 
         const requestOptions = {
             method: 'GET',

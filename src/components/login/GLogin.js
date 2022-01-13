@@ -5,7 +5,34 @@ const clientId = '33797170213-dm39mlprsjib8i1bgp2abebvvqimlmu6.apps.googleuserco
 
 function GLogin() {
     const onSuccess = (res) => {
-        console.log('[GLogin success] currentUser: ', res.profileObj)
+
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/glogin"
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: res.profileObj.email,
+                username: res.profileObj.email.split("@")[0],
+                first_name: res.profileObj.givenName,
+                last_name: res.profileObj.familyName
+            })
+        }
+
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then(
+                (result) => {
+                    localStorage.setItem('token', result)
+                    window.location.href = "/me"
+                })
+            .catch(error => {
+                console.log(error)
+            })
+
+        console.log('[GLogin success] currentUser: ', res)
     };
 
     const onFailure = (res) => {

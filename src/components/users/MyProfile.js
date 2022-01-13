@@ -2,6 +2,7 @@ import React from "react";
 import TimeAgo from "timeago-react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import {NavLink} from "react-router-dom";
 
 class MyProfile extends React.Component {
 
@@ -16,6 +17,7 @@ class MyProfile extends React.Component {
             r_password: "",
             analyzed: [],
             change_pwd: false,
+            friends: []
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,10 +29,11 @@ class MyProfile extends React.Component {
     componentDidMount() {
         this.fetchUser()
         this.fetchAnalyzed()
+        this.fetchFriends()
     }
 
     fetchAnalyzed() {
-        let url = "http://127.0.0.1:8000/users/" + localStorage.getItem('token') +"/analysis"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/" + localStorage.getItem('token') +"/analysis"
 
         const requestOptions = {
             method: 'POST',
@@ -58,7 +61,7 @@ class MyProfile extends React.Component {
 
     fetchUser() {
 
-        let url = "http://127.0.0.1:8000/users/me"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/me"
 
         const requestOptions = {
             method: 'POST',
@@ -83,9 +86,35 @@ class MyProfile extends React.Component {
             });
     }
 
+    fetchFriends() {
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships/my_friends"
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: localStorage.getItem('token'),
+            })
+        }
+
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then( (result) => {
+                console.log(result)
+                this.setState({
+                    friends: result
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     handleSubmit() {
 
-        let url = "http://127.0.0.1:8000/users/me_put"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/me_put"
 
         const requestOptions = {
             method: 'PUT',
@@ -120,7 +149,7 @@ class MyProfile extends React.Component {
     }
 
     analyze(val) {
-        let url = "http://127.0.0.1:8000/hashtags"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/hashtags"
 
         const requestOptions = {
             method: 'POST',
@@ -185,7 +214,7 @@ class MyProfile extends React.Component {
                 change_pwd: false
             })
 
-            let url = "http://127.0.0.1:8000/users/me_put"
+            let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/me_put"
 
             const requestOptions = {
                 method: 'PUT',
@@ -219,7 +248,7 @@ class MyProfile extends React.Component {
         const renderPassword =
             (
                 <div>
-                    <strong>Password: </strong>{this.state.user.password}<br/><br/>
+                    <strong>Password: </strong>&nbsp;&nbsp;{this.state.user.password}<br/><br/>
                 </div>
             )
         const renderPasswordChanging =
@@ -245,6 +274,22 @@ class MyProfile extends React.Component {
                     /><br/><br/>
                 </div>
             )
+
+        const friends = this.state.friends
+            .map((e, i) => {
+                return (
+                    <div key={i}>
+                        <div>
+                            <ul>
+                                <li><NavLink to={"/profile/" + ((e.to_username === user.username) ? e.from_user : e.to_user)}>
+                                    {(e.to_username === user.username) ? e.from_username : e.to_username}</NavLink></li>
+                                <small><TimeAgo datetime={e.created_at} locale='en_US'/><br/></small><hr/>
+                            </ul>
+                        </div>
+                    </div>
+
+                )})
+
         const hashtags = this.state.analyzed
             .map((e, i) => {
                 return (
@@ -268,22 +313,26 @@ class MyProfile extends React.Component {
             <div>
                 <p>HEADER</p>
                 <p>HEADER</p>
+                <div>
+                    <h1 className="title">My profile</h1>
+                </div>
                 <div className="user-box">
                     <div className="info">
-                        <strong>Username:</strong>&nbsp;&nbsp;{user.username}<br/><br/>
-                        <strong>First Name:</strong>&nbsp;&nbsp;{user.first_name}<br/><br/>
+                        <h2>Information: </h2>
+                        <strong>Username:</strong>&nbsp;&nbsp;&nbsp;{user.username}<br/><br/>
+                        <strong>First Name:</strong>&nbsp;{user.first_name}<br/><br/>
                         <strong>Last Name:</strong>&nbsp;&nbsp;{user.last_name}<br/><br/>
-                        <strong>Email:</strong>&nbsp;&nbsp;{user.email}<br/><br/>
+                        <strong>Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{user.email}<br/><br/>
                         {
                             changing_password ?
                                 renderPasswordChanging
                                 : renderPassword
                         }
-                        <strong>Token:</strong>&nbsp;&nbsp;{user.token}<br/><br/>
-                        <strong>Created:</strong>&emsp;&nbsp;&nbsp;&nbsp;
+                        <strong>Token:</strong>&emsp;&emsp;&emsp;&nbsp;{user.token}<br/><br/>
+                        <strong>Created:</strong>&emsp;&nbsp;&nbsp;
                             <TimeAgo datetime={user.created_at} locale='en_US'/><br/><br/>
 
-                        <strong>Points:</strong>&emsp;&emsp;&nbsp;&nbsp;{user.points}<br/><br/>
+                        <strong>Points:</strong>&emsp;&emsp;&nbsp;{user.points}<br/><br/>
 
                         <strong>About:</strong>&emsp;&emsp;&emsp;<textarea className="bottomMar" rows="6" cols="30"
                                                                               name="about" defaultValue={user.about}
@@ -301,6 +350,10 @@ class MyProfile extends React.Component {
                     <div className="analyzed-hashtags">
                         <h2>Saved Analysis:</h2>
                         {hashtags}
+                    </div>
+                    <div className="friends">
+                        <h2>Friends:</h2>
+                        {friends}
                     </div>
                 </div>
             </div>
