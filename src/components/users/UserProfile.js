@@ -23,7 +23,7 @@ class UserProfile extends React.Component {
     }
 
     fetchAnalyzed() {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/" + this.state.id + "/analysis"
+        let url = "http://127.0.0.1:8000/users/" + this.state.id + "/analysis"
 
         fetch(url)
             .then(response => response.json())
@@ -39,7 +39,7 @@ class UserProfile extends React.Component {
     }
 
     fetchUser() {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/" + this.state.id
+        let url = "http://127.0.0.1:8000/users/" + this.state.id
 
         fetch(url)
             .then(response => response.json())
@@ -56,7 +56,7 @@ class UserProfile extends React.Component {
 
 
     fetchFriends() {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships/my_friends"
+        let url = "http://127.0.0.1:8000/friendships/my_friends"
 
         const requestOptions = {
             method: 'POST',
@@ -90,8 +90,8 @@ class UserProfile extends React.Component {
                     <div key={i}>
                         <div>
                             <ul>
-                                <li><NavLink to={() => this.fetchUser((e.to_username === user.username) ? e.from_user : e.to_user)}>
-                                    {(e.to_username === user.username) ? e.from_username : e.to_username}</NavLink></li>
+                                <li>
+                                    {(e.to_username === user.username) ? e.from_username : e.to_username}</li>
                                 <small><TimeAgo datetime={e.created_at} locale='en_US'/><br/></small><hr/>
                             </ul>
                         </div>

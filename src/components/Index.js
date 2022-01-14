@@ -45,7 +45,7 @@ class Index extends React.Component {
     }
 
     fetchPending() {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships/pending"
+        let url = "http://127.0.0.1:8000/friendships/pending"
 
         const requestOptions = {
             method: 'POST',
@@ -75,7 +75,7 @@ class Index extends React.Component {
         if(!localStorage.getItem('token'))
             window.location.href = "/login"
         else {
-            let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships"
+            let url = "http://127.0.0.1:8000/friendships"
 
             const requestOptions = {
                 method: 'POST',
@@ -167,13 +167,17 @@ class Index extends React.Component {
             },
             body: JSON.stringify({
                 accepted: true,
-            })
+                token: localStorage.getItem('token')
+            }),
+
         }
 
         fetch(url, requestOptions)
             .then(response => response.json())
-            .then( () => {
-                this.fetchPending()
+            .then( (result) => {
+                this.setState({
+                    pending: result
+                })
             })
             .catch(error => {
                 console.log(error)
@@ -187,16 +191,20 @@ class Index extends React.Component {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-            }
+            },
+            body: JSON.stringify({
+                token: localStorage.getItem('token')
+            })
         }
 
         fetch(url, requestOptions)
             .then(response => response.json())
             .then( () => {
                 this.fetchPending()
-            })
+           })
             .catch(error => {
                 console.log(error)
+                this.fetchPending()
             })
     }
 
@@ -244,7 +252,7 @@ class Index extends React.Component {
                 <div className="search-box">
                     <form onSubmit={this.handleSubmit}>
                         <div>
-                            <TextField id="hashtag-input" name="hashtag" label="Hashtag or message" type="text" onChange={this.handleChange}/>
+                            <TextField id="hashtag-input" name="hashtag" label="Hashtag or keyword" type="text" onChange={this.handleChange}/>
                         </div>
                         <div className="filters">
                             <TextField id="number-input" name="number" label="Number of tweets" type="number" onChange={this.handleChange}/>

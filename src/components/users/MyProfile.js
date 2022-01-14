@@ -33,7 +33,7 @@ class MyProfile extends React.Component {
     }
 
     fetchAnalyzed() {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/" + localStorage.getItem('token') +"/analysis"
+        let url = "http://127.0.0.1:8000/users/" + localStorage.getItem('token') +"/analysis"
 
         const requestOptions = {
             method: 'POST',
@@ -61,7 +61,7 @@ class MyProfile extends React.Component {
 
     fetchUser() {
 
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/me"
+        let url = "http://127.0.0.1:8000/users/me"
 
         const requestOptions = {
             method: 'POST',
@@ -87,7 +87,7 @@ class MyProfile extends React.Component {
     }
 
     fetchFriends() {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships/my_friends"
+        let url = "http://127.0.0.1:8000/friendships/my_friends"
 
         const requestOptions = {
             method: 'POST',
@@ -114,7 +114,7 @@ class MyProfile extends React.Component {
 
     handleSubmit() {
 
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/me_put"
+        let url = "http://127.0.0.1:8000/users/me_put"
 
         const requestOptions = {
             method: 'PUT',
@@ -149,7 +149,7 @@ class MyProfile extends React.Component {
     }
 
     analyze(val) {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/hashtags"
+        let url = "http://127.0.0.1:8000/hashtags"
 
         const requestOptions = {
             method: 'POST',
@@ -214,7 +214,7 @@ class MyProfile extends React.Component {
                 change_pwd: false
             })
 
-            let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/me_put"
+            let url = "http://127.0.0.1:8000/users/me_put"
 
             const requestOptions = {
                 method: 'PUT',

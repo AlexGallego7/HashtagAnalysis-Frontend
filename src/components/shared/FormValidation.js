@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import {forEach} from "react-bootstrap/ElementChildren";
 
 const initialFormValues = {
     username: "",
@@ -9,18 +10,55 @@ const initialFormValues = {
     lname: "",
 }
 
-export const useFormControls = () => {
+export const useFormControls = (children, func) => {
     // We'll update "values" as the form updates
     const [values, setValues] = useState(initialFormValues);
     // "errors" is used to check the form for errors
     const [errors, setErrors] = useState({})
+    const [users, setUsers] = useState([])
+
+    const fetchUsers = () => {
+        let url = "http://127.0.0.1:8000/users"
+
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then( (result) => {
+                setUsers(result)
+            })
+            .catch( (error) => {
+                console.log(error)
+            })
+    }
+
+    fetchUsers()
 
     const isUsernameAvailable = (username) => {
+
+        let res = true
+        users.forEach((user) => {
+            if (user.username === username)
+                res = false
+        })
+
+        return res
 
     }
 
     const isEmailAvailable = (email) => {
+        let res = true
+        users.forEach((user) => {
+            if (user.email === email)
+                res = false
+        })
 
+        return res
     }
 
     const validate = (fieldValues = values) => {
@@ -49,7 +87,7 @@ export const useFormControls = () => {
             temp.email = fieldValues.email ? "" : "This field is required."
             if (fieldValues.email)
                 temp.email = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(fieldValues.email)
-                    ? isEmailAvailable(fieldValues) ? "" : "This email is not available."
+                    ? (isEmailAvailable(fieldValues.email) ? "" : "This email is not available.")
                     : "Email is not valid."
 
         }
@@ -57,8 +95,6 @@ export const useFormControls = () => {
         if ("r_password" in fieldValues) {
             temp.r_password = fieldValues.r_password ? "" : "This field is required."
             if (fieldValues.r_password) {
-                console.log(initialFormValues.password)
-                console.log(Object.values(values))
                 temp.r_password = (fieldValues.r_password === Object.values(values)[2]) ? "" : "Passwords must coincide."
             }
         }
@@ -79,7 +115,7 @@ export const useFormControls = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users"
+        let url = "http://127.0.0.1:8000/users"
 
         const requestOptions = {
             method: 'POST',
