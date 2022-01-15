@@ -1,7 +1,6 @@
 import React from 'react'
 import TimeAgo from "timeago-react";
 import Button from "@material-ui/core/Button";
-import {NavLink} from "react-router-dom";
 
 class UserProfile extends React.Component {
 
@@ -23,7 +22,7 @@ class UserProfile extends React.Component {
     }
 
     fetchAnalyzed() {
-        let url = "http://127.0.0.1:8000/users/" + this.state.id + "/analysis"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/" + this.state.id + "/analysis"
 
         fetch(url)
             .then(response => response.json())
@@ -39,7 +38,7 @@ class UserProfile extends React.Component {
     }
 
     fetchUser() {
-        let url = "http://127.0.0.1:8000/users/" + this.state.id
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/" + this.state.id
 
         fetch(url)
             .then(response => response.json())
@@ -56,7 +55,7 @@ class UserProfile extends React.Component {
 
 
     fetchFriends() {
-        let url = "http://127.0.0.1:8000/friendships/my_friends"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships/my_friends"
 
         const requestOptions = {
             method: 'POST',
@@ -137,9 +136,7 @@ class UserProfile extends React.Component {
 
                         <strong>Points:</strong>&emsp;&emsp;&nbsp;{user.points}<br/><br/>
 
-                        <strong>About:</strong>&emsp;&emsp;&emsp;<textarea className="bottomMar" rows="6" cols="30"
-                                                                           name="about" defaultValue={user.about}
-                                                                           onChange={this.handleChange}/><br/><br/>
+                        <strong>About:</strong>&emsp;&emsp;&emsp;{user.about}<br/><br/>
                     </div>
                     <div className="analyzed-hashtags">
                         <h2>Saved Analysis:</h2>

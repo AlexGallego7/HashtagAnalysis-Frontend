@@ -45,7 +45,7 @@ class Index extends React.Component {
     }
 
     fetchPending() {
-        let url = "http://127.0.0.1:8000/friendships/pending"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships/pending"
 
         const requestOptions = {
             method: 'POST',
@@ -75,7 +75,7 @@ class Index extends React.Component {
         if(!localStorage.getItem('token'))
             window.location.href = "/login"
         else {
-            let url = "http://127.0.0.1:8000/friendships"
+            let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships"
 
             const requestOptions = {
                 method: 'POST',
@@ -128,7 +128,7 @@ class Index extends React.Component {
 
     postHashtag() {
 
-        let url = "http://127.0.0.1:8000/hashtags"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/hashtags"
 
         const requestOptions = {
             method: 'POST',
@@ -158,7 +158,7 @@ class Index extends React.Component {
 
     acceptFriendRequest(id) {
 
-        let url = "http://127.0.0.1:8000/friendships/" + id
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships/" + id
 
         const requestOptions = {
             method: 'PUT',
@@ -185,7 +185,7 @@ class Index extends React.Component {
     }
 
     rejectFriendRequest(id) {
-        let url = "http://127.0.0.1:8000/friendships/" + id
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships/" + id
 
         const requestOptions = {
             method: 'DELETE',

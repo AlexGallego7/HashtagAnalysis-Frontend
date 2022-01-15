@@ -1,11 +1,12 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
+import Button from "@material-ui/core/Button";
 
 function PopUp(props) {
 
     const retrain_model = () => {
 
-        let url = "http://127.0.0.1:8000/train"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/train"
 
         const requestOptions = {
             method: 'GET',
@@ -26,29 +27,33 @@ function PopUp(props) {
 
     return (
         <Popup
-            trigger={props.trigger}
-            modal
+            trigger={props.trigger} modal closeOnDocumentClick
         >
             {close => (
                 <div className="modal">
-                    <button className="close" onClick={close}>
+                    <Button className="close" onClick={() => {
+                        retrain_model();
+                        close();
+                    }} style={{float: "right", background: "white"}}>
                         &times;
-                    </button>
-                    <div className="header"> Modal Title</div>
+                    </Button>
+                    <br/><br/>
+                    <div className="header"> Notification of wrong prediction </div><br/><br/>
                     <div className="content">
                         {' '}
-                        We will take into account your noticing. Thanks for that!
-                    </div>
+                        Thanks for letting us know. <br/>We will take this notification into account and take further
+                        action!
+                    </div><br/>
                     <div className="actions">
-                        <button
-                            className="button"
+                        <Button
+                            className="button" style={{background: "white"}}
                             onClick={() => {
                                 retrain_model();
                                 close();
                             }}
                         >
-                            close modal
-                        </button>
+                            Close
+                        </Button>
                     </div>
                 </div>
             )}

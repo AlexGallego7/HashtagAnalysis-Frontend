@@ -12,7 +12,7 @@ function Login() {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        let url = "http://127.0.0.1:8000/users/login"
+        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/login"
 
         const requestOptions = {
             method: 'POST',
