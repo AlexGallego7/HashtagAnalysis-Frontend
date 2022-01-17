@@ -3,6 +3,7 @@ import TimeAgo from "timeago-react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import {NavLink} from "react-router-dom";
+import { confirm } from "react-confirm-box";
 
 class MyProfile extends React.Component {
 
@@ -242,6 +243,48 @@ class MyProfile extends React.Component {
         }
     }
 
+    async deleteUser() {
+
+        const options = {
+            render: (message, onConfirm, onCancel) => {
+                return (
+                    <div>
+                        <h1>Are you sure?</h1>
+                        <Button variant="contained" type="submit" color="primary"
+                                onClick={onConfirm}>Yes</Button>
+                        <Button  style={{float: "right"}} variant="contained" type="submit" color="secondary"
+                                onClick={onCancel}>No</Button>
+                    </div>
+                );
+            }
+        };
+
+        const result = await confirm("Are you sure?", options);
+
+        if(result) {
+            let url = "https://nameless-sea-14571.herokuapp.com/https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/"
+                + localStorage.getItem('token')
+
+            const requestOptions = {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            };
+
+            fetch(url, requestOptions)
+
+                .then(response => response.json())
+                .then(
+                    () => {
+                    })
+                .catch( () => {
+                    localStorage.removeItem('token')
+                    window.location.href = "/"
+                });
+        }
+    }
+
     render() {
         const user = this.state.user;
         const changing_password = this.state.change_pwd;
@@ -346,6 +389,8 @@ class MyProfile extends React.Component {
                                 onClick={this.changePasswordPressed}>
                             {changing_password ? "Save password" : "Change password"}
                         </Button>
+                        <Button style={{marginTop: 10, marginLeft: 10, marginBottom: 10}} variant="contained" type="submit" color="secondary"
+                                onClick={this.deleteUser}>Delete profile</Button>
                     </div>
                     <div className="analyzed-hashtags">
                         <h2>Saved Analysis:</h2>

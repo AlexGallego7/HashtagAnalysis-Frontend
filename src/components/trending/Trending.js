@@ -2,6 +2,8 @@ import React from 'react'
 import {TwitterHashtagButton} from "react-twitter-embed";
 import SelectCountry from "./SelectCountry";
 import Button from "@material-ui/core/Button";
+import {trackPromise} from "react-promise-tracker";
+import LoaderIndicator from "../shared/LoaderIndicator";
 
 class Trending extends React.Component {
 
@@ -49,19 +51,19 @@ class Trending extends React.Component {
             })
         }
 
-        fetch(url, requestOptions)
-            .then(response => response.json())
-            .then( () => {
+        trackPromise(
+            fetch(url, requestOptions)
+                .then(response => response.json())
+                .then( () => {
+                    if(this.state.hashtag[0] === '#')
+                        window.location.href="analysis/" + this.state.hashtag.substr(1, this.state.hashtag.length)
+                    else
+                        window.location.href="analysis/" + this.state.hashtag
 
-                if(val[0] === '#')
-                    window.location.href="analysis/" + val.substr(1, val.length)
-                else
-                    window.location.href="analysis/" + val
-
-            })
-            .catch(error => {
-                console.log(error)
-            })
+                })
+                .catch(error => {
+                    console.log(error)
+                }))
     }
 
     fetchTrending(country_id) {
@@ -123,7 +125,10 @@ class Trending extends React.Component {
                     <h1 className="title">Trending</h1>
                     <div className="select-box">
                         <SelectCountry parentCallback={this.getCountryCode}/>
-                    </div><br/><br/>
+                    </div>
+                    <br/>
+                    <LoaderIndicator/>
+                    <br/>
                     <div>
                         {renderTrends}
                     </div>
