@@ -191,10 +191,9 @@ img {
 }
 
 .friend-box {
-  height: 10rem;
-  width: 30rem;
   margin-left: 10rem;
   margin-right: 5rem;
+  width: 300px;
   box-shadow: 0 0 3px black;
   border-radius: 20px;
   background-color: cornflowerblue;
@@ -205,8 +204,7 @@ img {
 }
 
 .how-to {
-  height: 11.2rem;
-  width: 40rem;
+  margin-right: 10rem;
   margin-left: 5rem;
   box-shadow: 0 0 3px black;
   border-radius: 20px;
@@ -216,14 +214,13 @@ img {
 }
 
 .login-info {
-  height: 10rem;
-  width: 20rem;
   border-radius: 20px;
   background-color: cornflowerblue;
   text-align: center;
   margin-top: 20px;
   margin-left: 20px;
   margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .pending {

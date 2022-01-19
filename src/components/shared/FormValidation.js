@@ -17,7 +17,7 @@ export const useFormControls = (children, func) => {
     const [users, setUsers] = useState([])
 
     const fetchUsers = () => {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users"
+        let url = "http://127.0.0.1:8000/users"
 
         const requestOptions = {
             method: 'GET',
@@ -114,7 +114,7 @@ export const useFormControls = (children, func) => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users"
+        let url = "http://127.0.0.1:8000/users"
 
         const requestOptions = {
             method: 'POST',

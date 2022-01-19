@@ -22,7 +22,7 @@ class UserProfile extends React.Component {
     }
 
     fetchAnalyzed() {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/" + this.state.id + "/analysis"
+        let url = "http://127.0.0.1:8000/users/" + this.state.id + "/analysis"
 
         fetch(url)
             .then(response => response.json())
@@ -38,7 +38,7 @@ class UserProfile extends React.Component {
     }
 
     fetchUser() {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/users/" + this.state.id
+        let url = "http://127.0.0.1:8000/users/" + this.state.id
 
         fetch(url)
             .then(response => response.json())
@@ -55,7 +55,7 @@ class UserProfile extends React.Component {
 
 
     fetchFriends() {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships/my_friends"
+        let url = "http://127.0.0.1:8000/my_friends"
 
         const requestOptions = {
             method: 'POST',

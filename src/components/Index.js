@@ -45,7 +45,7 @@ class Index extends React.Component {
     }
 
     fetchPending() {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships/pending"
+        let url = "http://127.0.0.1:8000/friendships/pending"
 
         const requestOptions = {
             method: 'POST',
@@ -75,7 +75,7 @@ class Index extends React.Component {
         if(!localStorage.getItem('token'))
             window.location.href = "/login"
         else {
-            let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships"
+            let url = "http://127.0.0.1:8000/friendships"
 
             const requestOptions = {
                 method: 'POST',
@@ -128,7 +128,7 @@ class Index extends React.Component {
 
     postHashtag() {
 
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/hashtags"
+        let url = "http://127.0.0.1:8000/hashtags"
 
         const requestOptions = {
             method: 'POST',
@@ -158,7 +158,7 @@ class Index extends React.Component {
 
     acceptFriendRequest(id) {
 
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships/" + id
+        let url = "http://127.0.0.1:8000/friendships/" + id
 
         const requestOptions = {
             method: 'PUT',
@@ -185,7 +185,7 @@ class Index extends React.Component {
     }
 
     rejectFriendRequest(id) {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/friendships/" + id
+        let url = "http://127.0.0.1:8000/friendships/" + id
 
         const requestOptions = {
             method: 'DELETE',
@@ -281,7 +281,7 @@ class Index extends React.Component {
                         <div className="friend-box">
                             <TextField style={{color: 'white', marginTop: 30}} name="friend" label="Add a friend"
                                        type="text" onChange={this.handleChange}/>
-                            <Button style={{marginLeft: 10, marginTop: 30}} variant="contained" type="submit"
+                            <Button style={{marginLeft: 10, marginTop: 30, marginBottom: 10}} variant="contained" type="submit"
                                     color="primary" onClick={this.addFriend}>Add friend</Button><br/>
                             <div style={{marginTop: 10}}>
                                 <small style={{color: "red"}}>{this.state.message_error}</small>
@@ -305,7 +305,7 @@ class Index extends React.Component {
                             <h1 className="title" style={{textAlign: "left"}}>How to use?</h1>
                         </div>
                         <div className="how-to">
-                            <p style={{marginTop: 20}}>
+                            <p style={{marginTop: 20, marginLeft: 20, marginRight: 20, marginBottom: 20}}>
                                 Welcome to Hashtag Analyzer. To begin analyzing, enter any #hashtag or keyword and
                                 the amount of tweets to use in the analysis. Hope you like it!<br/><br/>
 

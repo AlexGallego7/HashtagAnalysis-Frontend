@@ -37,7 +37,7 @@ class ShowTweets extends React.Component {
     }
 
     fetchTweets() {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/tweets"
+        let url = "http://127.0.0.1:8000/tweets"
 
         const requestOptions = {
             method: 'GET',
@@ -87,7 +87,7 @@ class ShowTweets extends React.Component {
 
     saveAnalysis() {
 
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/analysis"
+        let url = "http://127.0.0.1:8000/analysis"
 
         const positive = this.state.tweets.filter(t => t.sentiment === 'POSITIVE').length
         const neutral = this.state.tweets.filter(t => t.sentiment === 'NEUTRAL').length

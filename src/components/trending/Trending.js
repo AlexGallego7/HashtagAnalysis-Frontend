@@ -38,7 +38,7 @@ class Trending extends React.Component {
 
     postHashtag(val) {
 
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/hashtags"
+        let url = "http://127.0.0.1:8000/hashtags"
 
         const requestOptions = {
             method: 'POST',
@@ -55,10 +55,11 @@ class Trending extends React.Component {
             fetch(url, requestOptions)
                 .then(response => response.json())
                 .then( () => {
-                    if(this.state.hashtag[0] === '#')
-                        window.location.href="analysis/" + this.state.hashtag.substr(1, this.state.hashtag.length)
+
+                    if(val[0] === '#')
+                        window.location.href="analysis/" + val.substr(1, val.length)
                     else
-                        window.location.href="analysis/" + this.state.hashtag
+                        window.location.href="analysis/" + val
 
                 })
                 .catch(error => {
@@ -67,7 +68,7 @@ class Trending extends React.Component {
     }
 
     fetchTrending(country_id) {
-        let url = "https://tfg-hashtagapi-dev-we-app.herokuapp.com/trending/" + country_id
+        let url = "http://127.0.0.1:8000/trending/" + country_id
 
         const requestOptions = {
             method: 'GET',
@@ -92,7 +93,6 @@ class Trending extends React.Component {
     }
 
     render() {
-        console.log(this.state.hashtags)
         const hashtags = this.state.hashtags;
         const renderTrends = hashtags.map((e, i) => {
             return (
