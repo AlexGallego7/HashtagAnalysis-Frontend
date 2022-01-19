@@ -302,7 +302,7 @@ class Index extends React.Component {
                     </div>
                     <div>
                         <div>
-                            <h1 className="title" style={{textAlign: "left"}}>How to use?</h1>
+                            <h1 className="title" style={{textAlign: "left", marginLeft: '5rem'}}>How to use?</h1>
                         </div>
                         <div className="how-to">
                             <p style={{marginTop: 20, marginLeft: 20, marginRight: 20, marginBottom: 20}}>

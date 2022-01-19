@@ -217,10 +217,7 @@ img {
   border-radius: 20px;
   background-color: cornflowerblue;
   text-align: center;
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-bottom: 20px;
+  margin: 20px;
 }
 
 .pending {
@@ -263,7 +260,9 @@ img {
   .user-box .info {
     display: block;
     margin-top: 2rem;
-    margin-left: 10rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
   }
 
   .user-box .analyzed-hashtags {

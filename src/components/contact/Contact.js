@@ -14,7 +14,7 @@ class Contact extends React.Component {
                     <h1 className="title">Contact Us</h1>
                 </div>
                 <div className="user-box">
-                    <div className="info" style={{marginRight: 20, marginBottom: 20}}>
+                    <div className="info">
                         <h2>Information: </h2>
                         <h3>
                             Hi, my name is Alex Gallego and this webpage is my Final Degree Project of
