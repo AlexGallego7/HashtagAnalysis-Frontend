@@ -17,7 +17,7 @@ class TopTweets extends React.Component {
 
     fetchTweets() {
 
-        let url = "http://127.0.0.1:8000/hashtags/" + window.location.href.split('/')[4] + "/top"
+        let url = "https://tfg-backend-app.herokuapp.com/hashtags/" + window.location.href.split('/')[4] + "/top"
 
         const requestOptions = {
             method: 'GET',

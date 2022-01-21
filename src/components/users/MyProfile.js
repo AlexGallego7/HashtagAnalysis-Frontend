@@ -34,7 +34,7 @@ class MyProfile extends React.Component {
     }
 
     fetchAnalyzed() {
-        let url = "http://127.0.0.1:8000/users/" + localStorage.getItem('token') +"/analysis"
+        let url = "https://tfg-backend-app.herokuapp.com/users/" + localStorage.getItem('token') +"/analysis"
 
         const requestOptions = {
             method: 'POST',
@@ -62,7 +62,7 @@ class MyProfile extends React.Component {
 
     fetchUser() {
 
-        let url = "http://127.0.0.1:8000/users/me"
+        let url = "https://tfg-backend-app.herokuapp.com/users/me"
 
         const requestOptions = {
             method: 'POST',
@@ -88,7 +88,7 @@ class MyProfile extends React.Component {
     }
 
     fetchFriends() {
-        let url = "http://127.0.0.1:8000/friendships/my_friends"
+        let url = "https://tfg-backend-app.herokuapp.com/friendships/my_friends"
 
         const requestOptions = {
             method: 'POST',
@@ -115,7 +115,7 @@ class MyProfile extends React.Component {
 
     handleSubmit() {
 
-        let url = "http://127.0.0.1:8000/users/me_put"
+        let url = "https://tfg-backend-app.herokuapp.com/users/me_put"
 
         const requestOptions = {
             method: 'PUT',
@@ -150,7 +150,7 @@ class MyProfile extends React.Component {
     }
 
     analyze(val) {
-        let url = "http://127.0.0.1:8000/hashtags"
+        let url = "https://tfg-backend-app.herokuapp.com/hashtags"
 
         const requestOptions = {
             method: 'POST',
@@ -215,7 +215,7 @@ class MyProfile extends React.Component {
                 change_pwd: false
             })
 
-            let url = "http://127.0.0.1:8000/users/me_put"
+            let url = "https://tfg-backend-app.herokuapp.com/users/me_put"
 
             const requestOptions = {
                 method: 'PUT',
@@ -262,7 +262,7 @@ class MyProfile extends React.Component {
         const result = await confirm("Are you sure?", options);
 
         if(result) {
-            let url = "https://nameless-sea-14571.herokuapp.com/http://127.0.0.1:8000/users/"
+            let url = "https://nameless-sea-14571.herokuapp.com/https://tfg-backend-app.herokuapp.com/users/"
                 + localStorage.getItem('token')
 
             const requestOptions = {

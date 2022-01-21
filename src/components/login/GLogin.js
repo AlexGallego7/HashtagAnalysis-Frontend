@@ -6,7 +6,7 @@ const clientId = '33797170213-dm39mlprsjib8i1bgp2abebvvqimlmu6.apps.googleuserco
 function GLogin() {
     const onSuccess = (res) => {
 
-        let url = "http://127.0.0.1:8000/users/glogin"
+        let url = "https://tfg-backend-app.herokuapp.com/users/glogin"
 
         const requestOptions = {
             method: 'POST',

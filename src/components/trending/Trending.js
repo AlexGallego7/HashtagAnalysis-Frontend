@@ -38,7 +38,7 @@ class Trending extends React.Component {
 
     postHashtag(val) {
 
-        let url = "http://127.0.0.1:8000/hashtags"
+        let url = "https://tfg-backend-app.herokuapp.com/hashtags"
 
         const requestOptions = {
             method: 'POST',
@@ -68,7 +68,7 @@ class Trending extends React.Component {
     }
 
     fetchTrending(country_id) {
-        let url = "http://127.0.0.1:8000/trending/" + country_id
+        let url = "https://tfg-backend-app.herokuapp.com/trending/" + country_id
 
         const requestOptions = {
             method: 'GET',

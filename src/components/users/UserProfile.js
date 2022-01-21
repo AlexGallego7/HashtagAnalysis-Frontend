@@ -22,7 +22,7 @@ class UserProfile extends React.Component {
     }
 
     fetchAnalyzed() {
-        let url = "http://127.0.0.1:8000/users/" + this.state.id + "/analysis"
+        let url = "https://tfg-backend-app.herokuapp.com/users/" + this.state.id + "/analysis"
 
         fetch(url)
             .then(response => response.json())
@@ -38,7 +38,7 @@ class UserProfile extends React.Component {
     }
 
     fetchUser() {
-        let url = "http://127.0.0.1:8000/users/" + this.state.id
+        let url = "https://tfg-backend-app.herokuapp.com/users/" + this.state.id
 
         fetch(url)
             .then(response => response.json())
@@ -55,7 +55,7 @@ class UserProfile extends React.Component {
 
 
     fetchFriends() {
-        let url = "http://127.0.0.1:8000/my_friends"
+        let url = "https://tfg-backend-app.herokuapp.com/my_friends"
 
         const requestOptions = {
             method: 'POST',
